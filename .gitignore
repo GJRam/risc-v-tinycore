@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 
 #Testing Folder
-riscv-tests/
+dumps/
 
 # C extensions
 *.so
