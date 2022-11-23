@@ -1,23 +1,31 @@
-from elftools.elf.elffile import ELFFile
+""" A tiny tiny cpu RISC-V emulator """
+
 import glob
+from elftools.elf.elffile import ELFFile
 
-# RISC-V tiny tiny core
-"""
-Reads_elf_files
 
-Args:
-    filepath to elf file
-"""
+#CONSTANTS
+PC = 32 
+MEMORY = b'\x00'*0x4000 #(one kibibyte)
+
+
+
 
 def read_elf(filepath):
-    with open(filepath, 'rb') as f:
-        e = ELFFile(f)
-        for x in e.iter_segments():
-            print(x.header.get("p_paddr"))
+    """
+    Reads filepath at filepath and returns an ELFFile object
 
+    Args:
+        filepath: path to elf file
 
+    Returns:
+        None
+    """
+    with open(filepath, "rb") as file:
+        elf = ELFFile(file)
+        for segment in elf.iter_segments():
+            print(segment.header.get("p_paddr"))
 
 if __name__ == "__main__":
-    for name in glob.iglob('dumps/*'):
+    for name in glob.iglob("dumps/*"):
         read_elf(name)
-    

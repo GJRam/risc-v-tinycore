@@ -1,14 +1,14 @@
+FILES=$(git ls-files '*.py')
+
 fmt:
 	black .
 
 lint:
-	pylint $(git ls-files '*.py')
+	pylint .
 
+	 
 run:
 	python core.py
 
 test:
-	pytest tests
-
-
-		
+	pytest .
